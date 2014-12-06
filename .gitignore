@@ -1,0 +1,16 @@
+*~
+*.swp
+.*.swp
+.DS_Store
+.bundle
+.idea
+.yardoc
+.env
+.foreman
+.vagrant
+*.orig
+config/*.yml
+coverage
+doc
+log
+tmp
