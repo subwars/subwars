@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# If MAGLEV_HOME is not set - set it now
+[[ -z ${MAGLEV_HOME+x} ]] && MAGLEV_HOME=/opt/maglev
+PATH=$PATH:$MAGLEV_HOME/bin
+
+$MAGLEV_HOME/bin/rake commit
