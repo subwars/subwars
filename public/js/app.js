@@ -1,8 +1,17 @@
+var currentGeohash = '';
+
 function positionUpdated(position){
   var lat = position.coords.latitude,
     lng = position.coords.longitude,
     accuracy = position.coords.accuracy,
-    geohash = encodeGeoHash(lat, lng);
+    full_geohash = encodeGeoHash(lat, lng),
+    geohash = full_geohash.substr(0,8);
+
+  if (currentGeohash == geohash) {
+    return;
+  };
+
+  currentGeohash = geohash;
 
   console.log('latitude:', lat);
   console.log('longitude:', lng);
