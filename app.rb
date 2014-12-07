@@ -35,7 +35,8 @@ module Subwars
       current_device.move_to geocell_param
       Maglev.commit
 
-      'Pinged as %s in %s' % [current_device.name, geohash_param]
+      'Pinged as %s in %s at %s' %
+        [current_device.name, geohash_param, Time.now.strftime('%Y-%m-%d %H:%M:%S')]
     end
 
     get '/signin/:name' do
