@@ -11,6 +11,11 @@ document.querySelector('x-geolocation').addEventListener('positionchange', funct
   $('#lng').html(lng);
   $('#geohash').html(geohash);
 
+  $.get('/ping/'+geohash).done(function(data){
+    console.log(data);
+    $('#pings').prepend("<li>"+data+"</li>");
+  });
+
   $.getJSON('/geocells/'+geohash).done(function(data){
     var jsonString = JSON.stringify(data, null, 4);
 
