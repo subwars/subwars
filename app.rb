@@ -32,7 +32,6 @@ module Subwars
     end
 
     get '/ping/:geohash' do
-      content_type :json
       current_device.move_to geocell_param
       Maglev.commit
 
