@@ -1,5 +1,12 @@
 var currentGeohash = '';
 
+function drawMap(){
+  var chars = "0123456789bcdefghjkmnpqrstuvwxyz".split('');
+  $.each(chars, function(idx,c){
+    $('#map').append('<div class="ocean-gray geohash-'+c+'"></div>');
+  });
+};
+
 function positionUpdated(position){
   var lat = position.coords.latitude,
     lng = position.coords.longitude,
@@ -25,6 +32,8 @@ function positionUpdated(position){
 
   $.get('/ping/'+geohash).done(function(data){
     console.log(data);
+    console.log('#map .geohash-'+geohash[7]);
+    $('#map .geohash-'+geohash[7]).removeClass('ocean-gray').addClass('ocean');
     $('#pings').prepend("<li>"+data+"</li>");
   });
 
@@ -35,6 +44,7 @@ function positionUpdated(position){
 };
 
 $(function(){
+  drawMap();
   navigator.geolocation.watchPosition(
     positionUpdated,
     function(error){

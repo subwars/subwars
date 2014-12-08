@@ -1,0 +1,86 @@
+#map {
+  position: relative;
+  width: 128px;
+  height: 256px;
+}
+#map.vertical {
+  position: absolute;
+  left: 120px;
+  width: 256px;
+  height: 128px;
+}
+
+#map div { position: absolute; }
+
+#map.vertical div.geohash-p{ top: 0px; left: 0px }
+#map.vertical div.geohash-r{ top: 0px; left: 32px }
+#map.vertical div.geohash-x{ top: 0px; left: 64px }
+#map.vertical div.geohash-z{ top: 0px; left: 96px }
+
+#map.vertical div.geohash-n{ top: 32px; left: 0px }
+#map.vertical div.geohash-q{ top: 32px; left: 32px }
+#map.vertical div.geohash-w{ top: 32px; left: 64px }
+#map.vertical div.geohash-y{ top: 32px; left: 96px }
+
+#map.vertical div.geohash-j{ top: 64px; left: 0px }
+#map.vertical div.geohash-m{ top: 64px; left: 32px }
+#map.vertical div.geohash-t{ top: 64px; left: 64px }
+#map.vertical div.geohash-v{ top: 64px; left: 96px }
+
+#map.vertical div.geohash-h{ top: 96px; left: 0px }
+#map.vertical div.geohash-k{ top: 96px; left: 32px }
+#map.vertical div.geohash-s{ top: 96px; left: 64px }
+#map.vertical div.geohash-u{ top: 96px; left: 96px }
+
+#map.vertical div.geohash-5{ top: 128px; left: 0px }
+#map.vertical div.geohash-7{ top: 128px; left: 32px }
+#map.vertical div.geohash-e{ top: 128px; left: 64px }
+#map.vertical div.geohash-g{ top: 128px; left: 96px }
+
+#map.vertical div.geohash-4{ top: 160px; left: 0px }
+#map.vertical div.geohash-6{ top: 160px; left: 32px }
+#map.vertical div.geohash-d{ top: 160px; left: 64px }
+#map.vertical div.geohash-f{ top: 160px; left: 96px }
+
+#map.vertical div.geohash-1{ top: 192px; left: 0px }
+#map.vertical div.geohash-3{ top: 192px; left: 32px }
+#map.vertical div.geohash-9{ top: 192px; left: 64px }
+#map.vertical div.geohash-c{ top: 192px; left: 96px }
+
+#map.vertical div.geohash-0{ top: 224px; left: 0px }
+#map.vertical div.geohash-2{ top: 224px; left: 32px }
+#map.vertical div.geohash-8{ top: 224px; left: 64px }
+#map.vertical div.geohash-b{ top: 224px; left: 96px }
+
+#map div.geohash-b{ top: 0px; left: 0px }
+#map div.geohash-c{ top: 0px; left: 32px }
+#map div.geohash-f{ top: 0px; left: 64px }
+#map div.geohash-g{ top: 0px; left: 96px }
+#map div.geohash-u{ top: 0px; left: 128px }
+#map div.geohash-v{ top: 0px; left: 160px }
+#map div.geohash-y{ top: 0px; left: 192px }
+#map div.geohash-z{ top: 0px; left: 224px }
+#map div.geohash-8{ top: 32px; left: 0px }
+#map div.geohash-9{ top: 32px; left: 32px }
+#map div.geohash-d{ top: 32px; left: 64px }
+#map div.geohash-e{ top: 32px; left: 96px }
+#map div.geohash-s{ top: 32px; left: 128px }
+#map div.geohash-t{ top: 32px; left: 160px }
+#map div.geohash-w{ top: 32px; left: 192px }
+#map div.geohash-x{ top: 32px; left: 224px }
+#map div.geohash-2{ top: 64px; left: 0px }
+#map div.geohash-3{ top: 64px; left: 32px }
+#map div.geohash-6{ top: 64px; left: 64px }
+#map div.geohash-7{ top: 64px; left: 96px }
+#map div.geohash-k{ top: 64px; left: 128px }
+#map div.geohash-m{ top: 64px; left: 160px }
+#map div.geohash-q{ top: 64px; left: 192px }
+#map div.geohash-r{ top: 64px; left: 224px }
+#map div.geohash-0{ top: 96px; left: 0px }
+#map div.geohash-1{ top: 96px; left: 32px }
+#map div.geohash-4{ top: 96px; left: 64px }
+#map div.geohash-5{ top: 96px; left: 96px }
+#map div.geohash-h{ top: 96px; left: 128px }
+#map div.geohash-j{ top: 96px; left: 160px }
+#map div.geohash-n{ top: 96px; left: 192px }
+#map div.geohash-p{ top: 96px; left: 224px }

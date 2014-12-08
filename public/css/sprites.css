@@ -1,0 +1,88 @@
+.human-dead, .human-normal, .human-self, .sea-monster-dead, .sea-monster-normal, .seaserpent-dead, .seaserpent-normal, .squid-dead, .squid-normal, .sunken-dead, .sunken-normal, .sunken-self, .ocean, .ocean-gray{
+	background: url(/img/sprites.png) no-repeat;
+}
+
+.human-dead{
+	background-position: -32px 0;
+	width: 32px;
+	height: 32px;
+}
+
+.human-normal{
+	background-position: 0 0;
+	width: 32px;
+	height: 32px;
+}
+
+.human-self{
+	background-position: -64px 0;
+	width: 32px;
+	height: 32px;
+}
+
+.sea-monster-dead{
+	background-position: -32px -124px ;
+	width: 32px;
+	height: 32px;
+}
+
+.sea-monster-normal{
+	background-position: 0 -124px ;
+	width: 32px;
+	height: 32px;
+}
+
+.seaserpent-dead{
+	background-position: -32px -64px ;
+	width: 32px;
+	height: 32px;
+}
+
+.seaserpent-normal{
+	background-position: 0 -64px ;
+	width: 32px;
+	height: 32px;
+}
+
+.squid-dead{
+	background-position: -32px -96px ;
+	width: 32px;
+	height: 32px;
+}
+
+.squid-normal{
+	background-position: 0 -96px ;
+	width: 32px;
+	height: 32px;
+}
+
+.sunken-dead{
+	background-position: -32px -32px ;
+	width: 32px;
+	height: 32px;
+}
+
+.sunken-normal{
+	background-position: 0 -32px ;
+	width: 32px;
+	height: 32px;
+}
+
+.sunken-self{
+	background-position: -64px -33px ;
+	width: 32px;
+	height: 32px;
+}
+
+.ocean{
+	background-position: -96px 0;
+	width: 32px;
+	height: 32px;
+}
+
+.ocean-gray{
+	background-position: -96px -32px ;
+	width: 32px;
+	height: 32px;
+}
+
