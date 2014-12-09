@@ -11,44 +11,56 @@ function positionUpdated(position){
   var lat = position.coords.latitude,
     lng = position.coords.longitude,
     accuracy = position.coords.accuracy,
-    full_geohash = encodeGeoHash(lat, lng),
-    geohash = full_geohash.substr(0,8);
+    full_geohash = window.geohash.encode(lat, lng),
+    sub_geohash = '';
 
-  if (currentGeohash == geohash) {
-    return;
-  };
+  $('#map div').removeClass('ocean').addClass('ocean-gray');
 
-  currentGeohash = geohash;
+  if (accuracy < 20) {
+    sub_geohash = full_geohash.substr(0,8);
+    $('#map').addClass('vertical');
+  } else {
+    sub_geohash = full_geohash.substr(0,7);
+    $('#map').removeClass('vertical');
+  }
 
-  console.log('latitude:', lat);
-  console.log('longitude:', lng);
-  console.log('accuracy:', lng);
-  console.log('geohash:', geohash);
+  $('#map .geohash-'+sub_geohash[sub_geohash.length-1]).removeClass('ocean-gray').addClass('ocean');
 
-  $('#lat').html(lat);
-  $('#lng').html(lng);
-  $('#acc').html(accuracy);
-  $('#geohash').html(geohash);
+  //console.log('latitude:', lat);
+  //console.log('longitude:', lng);
+  console.log('accuracy:', accuracy);
+  console.log('geohash:', sub_geohash);
 
-  $.get('/ping/'+geohash).done(function(data){
+  //$('#lat').html(lat);
+  //$('#lng').html(lng);
+  //$('#acc').html(accuracy);
+  //$('#geohash').html(geohash);
+
+  $.get('/scan/'+sub_geohash).done(function(data){
     console.log(data);
-    console.log('#map .geohash-'+geohash[7]);
-    $('#map .geohash-'+geohash[7]).removeClass('ocean-gray').addClass('ocean');
-    $('#pings').prepend("<li>"+data+"</li>");
+    //$('#map div').removeClass('ocean').addClass('ocean-gray');
+    //$('#map .geohash-'+geohash[7]).removeClass('ocean-gray').addClass('ocean');
+    //$('#pings').prepend("<li>"+data+"</li>");
   });
 
-  $.getJSON('/geocells/'+geohash).done(function(data){
-    var jsonString = JSON.stringify(data, null, 4);
-    $('#locations').prepend("<li><pre>"+jsonString+"</pre></li>");
-  });
+  //$.getJSON('/geocells/'+geohash).done(function(data){
+  //  var jsonString = JSON.stringify(data, null, 4);
+  //  $('#locations').prepend("<li><pre>"+jsonString+"</pre></li>");
+  //});
 };
 
 $(function(){
   drawMap();
+  navigator.geolocation.getAccurateCurrentPosition(
+    positionUpdated,
+    function(err){console.log(err);},
+    positionUpdated
+  );
   navigator.geolocation.watchPosition(
     positionUpdated,
     function(error){
-      window.alert(error)
-    }
+      console.log(error);
+    },
+    { maximimAge: 0, enableHighAccuracy: true }
   )
 });
