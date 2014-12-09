@@ -1,13 +1,11 @@
-html, body {
+body {
   margin: 0;
   padding: 0;
-}
-#info {
-  position: absolute;
-  left: 260px;
+  position: relative;
 }
 #map {
   position: absolute;
+  top: 20px;
   width: 128px;
   height: 256px;
 }
