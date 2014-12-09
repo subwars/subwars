@@ -9,18 +9,12 @@ module Subwars
     include Subwars::Helpers
 
     configure do
-      Mobvious.configure do |config|
-        config.strategies = [ Mobvious::Strategies::MobileESP.new ]
-      end
-      use Mobvious::Manager
       set :root, App.root
       enable :static
       set :sessions, secret: ENV['SESSION_SECRET'] || 'subs'
     end
 
-    before do
-      Maglev.abort
-    end
+    before{ Maglev.abort }
 
     get '/' do
       send_file File.expand_path('../public/index.html', __FILE__)
@@ -31,31 +25,22 @@ module Subwars
       JSON.dump geocell_param.to_hash
     end
 
-    get '/ping/:geohash' do
-      current_device.move_to geocell_param
+    get '/scan/:geohash' do
+      current_player.scan geohash_param
       Maglev.commit
-
-      'Pinged as %s in %s at %s' %
-        [current_device.name, geohash_param, Time.now.strftime('%Y-%m-%d %H:%M:%S')]
+      status 204
     end
 
     get '/signin/:name' do
       player_name = params[:name]
-      player = Player[player_name] || create_player(player_name)
+      player = Player.find_by_name(player_name) || create_player(player_name)
       signin_as(player)
-
-      'Signed in as %s:%#x' % [player_name, session[:player_id]]
+      redirect_to '/'
     end
 
     get '/signout' do
       session.destroy
-
-      'Signed out'
-    end
-
-    get '/device' do
-      content_type :json
-      JSON.dump current_device.to_hash
+      redirect_to '/'
     end
   end
 end

@@ -1,14 +1,5 @@
 module Subwars
   module Helpers
-    def current_device
-      current_player.device_by_type(device_type) ||
-        current_player.add_device(device_type)
-    end
-
-    def device_type
-      request.env['mobvious.device_type'] || :unknown
-    end
-
     def geohash_precision
       8
     end
@@ -17,20 +8,23 @@ module Subwars
       (params[:geohash] || '')[0...geohash_precision]
     end
 
+    def game
+      Game.default
+    end
+
     def geocell_param
-      Geocell[geohash_param]
+      game.geocell_root[geohash_param]
     end
 
     def create_player(player_name)
-      player = Player.new player_name
-      player.add_device device_type
+      player = game.create_player player_name
       player.stage
       Maglev.commit
       player
     end
 
     def current_player
-      if session[:player_id] && (player = ObjectSpace._id2ref session[:player_id])
+      if session[:player_uuid] && (player = Player[session[:player_uuid]])
         return player
       else
         player = create_player('Unknown')
@@ -40,7 +34,7 @@ module Subwars
     end
 
     def signin_as(player)
-      session[:player_id] = player.__id__
+      session[:player_id] = player.uuid
     end
   end
 end
