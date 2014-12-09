@@ -1,18 +1,17 @@
-require 'storable'
-
 class Entity
-  ROOT_KEY = :entities
+  ROOT_KEY = :ENT
   include Storable
 
-  attr_accessor :name
+  attr_accessor :name, :game
   attr_accessor :current_cell, :transitions
 
-  def self.[](name)
-    store.detect{|entity| entity.name == name}
+  def initialize(game, name)
+    @game = game
+    @name = name
   end
 
-  def initialize(name)
-    @name = name
+  def root
+    game.geocell_root
   end
 
   def transitions
@@ -26,6 +25,10 @@ class Entity
     transitions << Transition.new(self, cell)
   end
 
+  def remove_from_current_cell
+    current_cell.remove_content(self) if current_cell
+  end
+
   def to_hash
     {
       class: self.class.name,
@@ -33,13 +36,9 @@ class Entity
     }
   end
 
-  def remove_from_current_cell
-    current_cell.remove_content(self) if current_cell
-  end
-
   def stage
     super
-    move_to Geocell.root
+    move_to root
   end
 
   def destroy
@@ -48,5 +47,3 @@ class Entity
     self.current_cell = nil
   end
 end
-
-Entity.store
