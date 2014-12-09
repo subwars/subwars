@@ -1,11 +1,13 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
 #map {
   position: relative;
   width: 128px;
   height: 256px;
 }
 #map.vertical {
-  position: absolute;
-  left: 120px;
   width: 256px;
   height: 128px;
 }
