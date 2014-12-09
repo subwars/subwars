@@ -35,12 +35,12 @@ module Subwars
       player_name = params[:name]
       player = Player.find_by_name(player_name) || create_player(player_name)
       signin_as(player)
-      redirect_to '/'
+      redirect '/'
     end
 
     get '/signout' do
       session.destroy
-      redirect_to '/'
+      redirect '/'
     end
   end
 end
