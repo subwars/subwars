@@ -2,8 +2,12 @@ html, body {
   margin: 0;
   padding: 0;
 }
+#info {
+  position: absolute;
+  left: 260px;
+}
 #map {
-  position: relative;
+  position: absolute;
   width: 128px;
   height: 256px;
 }

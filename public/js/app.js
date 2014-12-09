@@ -14,8 +14,6 @@ function positionUpdated(position){
     full_geohash = window.geohash.encode(lat, lng),
     sub_geohash = '';
 
-  $('#map div').removeClass('ocean').addClass('ocean-gray');
-
   if (accuracy < 20) {
     sub_geohash = full_geohash.substr(0,8);
     $('#map').addClass('vertical');
@@ -24,29 +22,22 @@ function positionUpdated(position){
     $('#map').removeClass('vertical');
   }
 
+  if (currentGeohash == sub_geohash) {
+    return;
+  };
+
+  currentGeohash = sub_geohash;
+
+  $('#acc').html(accuracy);
+  $('#geohash').html(sub_geohash);
+
+  $('#map div').removeClass('ocean').addClass('ocean-gray');
   $('#map .geohash-'+sub_geohash[sub_geohash.length-1]).removeClass('ocean-gray').addClass('ocean');
 
-  //console.log('latitude:', lat);
-  //console.log('longitude:', lng);
   console.log('accuracy:', accuracy);
   console.log('geohash:', sub_geohash);
 
-  //$('#lat').html(lat);
-  //$('#lng').html(lng);
-  //$('#acc').html(accuracy);
-  //$('#geohash').html(geohash);
-
-  $.get('/scan/'+sub_geohash).done(function(data){
-    console.log(data);
-    //$('#map div').removeClass('ocean').addClass('ocean-gray');
-    //$('#map .geohash-'+geohash[7]).removeClass('ocean-gray').addClass('ocean');
-    //$('#pings').prepend("<li>"+data+"</li>");
-  });
-
-  //$.getJSON('/geocells/'+geohash).done(function(data){
-  //  var jsonString = JSON.stringify(data, null, 4);
-  //  $('#locations').prepend("<li><pre>"+jsonString+"</pre></li>");
-  //});
+  $.get('/scan/'+sub_geohash)
 };
 
 $(function(){
