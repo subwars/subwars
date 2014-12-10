@@ -25,8 +25,8 @@ module Subwars
       JSON.dump geocell_param.to_hash
     end
 
-    get '/scan/:geohash' do
-      current_player.scan geohash_param
+    get '/scan/:geohash/:accuracy' do
+      current_player.scan geohash_param, params[:accuracy].to_f
       Maglev.commit
       status 204
     end

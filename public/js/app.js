@@ -14,7 +14,7 @@ function positionUpdated(position){
     full_geohash = window.geohash.encode(lat, lng),
     sub_geohash = '';
 
-  if (accuracy < 20) {
+  if (true || accuracy < 20) {
     sub_geohash = full_geohash.substr(0,8);
     $('#map').addClass('vertical');
   } else {
@@ -37,7 +37,7 @@ function positionUpdated(position){
   console.log('accuracy:', accuracy);
   console.log('geohash:', sub_geohash);
 
-  $.get('/scan/'+sub_geohash)
+  $.get('/scan/'+sub_geohash+'/'+accuracy);
 };
 
 $(function(){
