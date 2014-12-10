@@ -34,7 +34,7 @@ module Subwars
     end
 
     def signin_as(player)
-      session[:player_id] = player.uuid
+      session[:player_uuid] = player.uuid
     end
   end
 end
