@@ -37,7 +37,7 @@ function positionUpdated(position){
   console.log('accuracy:', accuracy);
   console.log('geohash:', sub_geohash);
 
-  $.get('/scan/'+sub_geohash+'/'+accuracy);
+  $.post('/scans?geohash='+sub_geohash+'&accuracy='+accuracy);
 };
 
 $(function(){
