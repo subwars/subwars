@@ -3,6 +3,12 @@ body {
   padding: 0;
   position: relative;
 }
+#grid {
+  position: absolute;
+  top: 20px;
+  width: 512px;
+  height: 512px;
+}
 #map {
   position: absolute;
   top: 20px;
@@ -13,6 +19,72 @@ body {
   width: 256px;
   height: 128px;
 }
+
+#grid div { position: absolute; }
+#grid .gh-0- { width:  64px; height: 128px; left:    0px; top:  384px; }
+#grid .gh-1- { width:  64px; height: 128px; left:   64px; top:  384px; }
+#grid .gh-2- { width:  64px; height: 128px; left:    0px; top:  256px; }
+#grid .gh-3- { width:  64px; height: 128px; left:   64px; top:  256px; }
+#grid .gh-4- { width:  64px; height: 128px; left:  128px; top:  384px; }
+#grid .gh-5- { width:  64px; height: 128px; left:  192px; top:  384px; }
+#grid .gh-6- { width:  64px; height: 128px; left:  128px; top:  256px; }
+#grid .gh-7- { width:  64px; height: 128px; left:  192px; top:  256px; }
+#grid .gh-8- { width:  64px; height: 128px; left:    0px; top:  128px; }
+#grid .gh-9- { width:  64px; height: 128px; left:   64px; top:  128px; }
+#grid .gh-b- { width:  64px; height: 128px; left:    0px; top:    0px; }
+#grid .gh-c- { width:  64px; height: 128px; left:   64px; top:    0px; }
+#grid .gh-d- { width:  64px; height: 128px; left:  128px; top:  128px; }
+#grid .gh-e- { width:  64px; height: 128px; left:  192px; top:  128px; }
+#grid .gh-f- { width:  64px; height: 128px; left:  128px; top:    0px; }
+#grid .gh-g- { width:  64px; height: 128px; left:  192px; top:    0px; }
+#grid .gh-h- { width:  64px; height: 128px; left:  256px; top:  384px; }
+#grid .gh-j- { width:  64px; height: 128px; left:  320px; top:  384px; }
+#grid .gh-k- { width:  64px; height: 128px; left:  256px; top:  256px; }
+#grid .gh-m- { width:  64px; height: 128px; left:  320px; top:  256px; }
+#grid .gh-n- { width:  64px; height: 128px; left:  384px; top:  384px; }
+#grid .gh-p- { width:  64px; height: 128px; left:  448px; top:  384px; }
+#grid .gh-q- { width:  64px; height: 128px; left:  384px; top:  256px; }
+#grid .gh-r- { width:  64px; height: 128px; left:  448px; top:  256px; }
+#grid .gh-s- { width:  64px; height: 128px; left:  256px; top:  128px; }
+#grid .gh-t- { width:  64px; height: 128px; left:  320px; top:  128px; }
+#grid .gh-u- { width:  64px; height: 128px; left:  256px; top:    0px; }
+#grid .gh-v- { width:  64px; height: 128px; left:  320px; top:    0px; }
+#grid .gh-w- { width:  64px; height: 128px; left:  384px; top:  128px; }
+#grid .gh-x- { width:  64px; height: 128px; left:  448px; top:  128px; }
+#grid .gh-y- { width:  64px; height: 128px; left:  384px; top:    0px; }
+#grid .gh-z- { width:  64px; height: 128px; left:  448px; top:    0px; }
+#grid  .gh-0 { width:  16px; height:  16px; left:    0px; top:  112px; }
+#grid  .gh-1 { width:  16px; height:  16px; left:    0px; top:   96px; }
+#grid  .gh-2 { width:  16px; height:  16px; left:   16px; top:  112px; }
+#grid  .gh-3 { width:  16px; height:  16px; left:   16px; top:   96px; }
+#grid  .gh-4 { width:  16px; height:  16px; left:    0px; top:   80px; }
+#grid  .gh-5 { width:  16px; height:  16px; left:    0px; top:   64px; }
+#grid  .gh-6 { width:  16px; height:  16px; left:   16px; top:   80px; }
+#grid  .gh-7 { width:  16px; height:  16px; left:   16px; top:   64px; }
+#grid  .gh-8 { width:  16px; height:  16px; left:   32px; top:  112px; }
+#grid  .gh-9 { width:  16px; height:  16px; left:   32px; top:   96px; }
+#grid  .gh-b { width:  16px; height:  16px; left:   48px; top:  112px; }
+#grid  .gh-c { width:  16px; height:  16px; left:   48px; top:   96px; }
+#grid  .gh-d { width:  16px; height:  16px; left:   32px; top:   80px; }
+#grid  .gh-e { width:  16px; height:  16px; left:   32px; top:   64px; }
+#grid  .gh-f { width:  16px; height:  16px; left:   48px; top:   80px; }
+#grid  .gh-g { width:  16px; height:  16px; left:   48px; top:   64px; }
+#grid  .gh-h { width:  16px; height:  16px; left:    0px; top:   48px; }
+#grid  .gh-j { width:  16px; height:  16px; left:    0px; top:   32px; }
+#grid  .gh-k { width:  16px; height:  16px; left:   16px; top:   48px; }
+#grid  .gh-m { width:  16px; height:  16px; left:   16px; top:   32px; }
+#grid  .gh-n { width:  16px; height:  16px; left:    0px; top:   16px; }
+#grid  .gh-p { width:  16px; height:  16px; left:    0px; top:    0px; }
+#grid  .gh-q { width:  16px; height:  16px; left:   16px; top:   16px; }
+#grid  .gh-r { width:  16px; height:  16px; left:   16px; top:    0px; }
+#grid  .gh-s { width:  16px; height:  16px; left:   32px; top:   48px; }
+#grid  .gh-t { width:  16px; height:  16px; left:   32px; top:   32px; }
+#grid  .gh-u { width:  16px; height:  16px; left:   48px; top:   48px; }
+#grid  .gh-v { width:  16px; height:  16px; left:   48px; top:   32px; }
+#grid  .gh-w { width:  16px; height:  16px; left:   32px; top:   16px; }
+#grid  .gh-x { width:  16px; height:  16px; left:   32px; top:    0px; }
+#grid  .gh-y { width:  16px; height:  16px; left:   48px; top:   16px; }
+#grid  .gh-z { width:  16px; height:  16px; left:   48px; top:    0px; }
 
 #map div { position: absolute; }
 

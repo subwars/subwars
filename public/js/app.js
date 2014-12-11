@@ -2,8 +2,14 @@ var currentGeohash = '';
 
 function drawMap(){
   var chars = "0123456789bcdefghjkmnpqrstuvwxyz".split('');
-  $.each(chars, function(idx,c){
-    $('#map').append('<div class="ocean-gray geohash-'+c+'"></div>');
+  var parentCell;
+
+  $.each(chars, function(idx,parentChar){
+    $('#grid').append('<div id="gh-'+parentChar+'" class="gh-'+parentChar+'-"></div>');
+    $.each(chars, function(idx,kidChar){
+      $('#gh-'+parentChar).append('<div id="gh-'+parentChar+kidChar+'" class="gh black gh-'+kidChar+'"></div>');
+    });
+    //$('#map').append('<div class="ocean-gray geohash-'+c+'"></div>');
   });
 };
 
@@ -31,8 +37,12 @@ function positionUpdated(position){
   $('#acc').html(accuracy);
   $('#geohash').html(sub_geohash);
 
-  $('#map div').removeClass('ocean').addClass('ocean-gray');
-  $('#map .geohash-'+sub_geohash[sub_geohash.length-1]).removeClass('ocean-gray').addClass('ocean');
+  $('#grid .ocean').removeClass('ocean').addClass('ocean-gray');
+
+  $('#gh-'+sub_geohash.substr(sub_geohash.length-2))
+    .removeClass('black')
+    .removeClass('ocean-gray')
+    .addClass('ocean');
 
   console.log('accuracy:', accuracy);
   console.log('geohash:', sub_geohash);
