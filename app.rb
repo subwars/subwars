@@ -25,6 +25,11 @@ module Subwars
       JSON.dump geocell_param.to_hash
     end
 
+    get '/scans' do
+      content_type :json
+      JSON.dump current_player.scans.map{|scan| scan.cell}
+    end
+
     post '/scans' do
       current_player.scan geohash_param, params[:accuracy].to_f
       Maglev.commit

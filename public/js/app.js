@@ -16,11 +16,13 @@ function drawMap(){
   //});
 };
 
+function scrollToPosition() {
+  $('.gh-active')[0].scrollIntoView(true);
+}
+
 function positionAcquired(position){
   positionUpdated(position);
-  setTimeout(function(){
-    $('.gh-active')[0].scrollIntoView(true);
-  }, 200);
+  setTimeout(scrollToPosition, 200);
 }
 
 function positionUpdated(position){
@@ -43,7 +45,7 @@ function positionUpdated(position){
     .removeClass('gh-active ocean')
     .addClass('ocean-gray');
 
-  var displayed_hash = sub_geohash.substr(sub_geohash.length-3);
+  var displayed_hash = sub_geohash.substr(sub_geohash.length-4);
 
   var ancestors = '';
   var parentCell;
@@ -72,6 +74,9 @@ function positionUpdated(position){
 };
 
 $(function(){
+  $('#grid').click(function(){
+    scrollToPosition();
+  });
   drawMap();
   navigator.geolocation.getAccurateCurrentPosition(
     positionAcquired,
