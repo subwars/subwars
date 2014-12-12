@@ -1,13 +1,24 @@
-body {
+html, body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  height: 100%;
   position: relative;
 }
 #grid {
+  background-color: black;
   position: absolute;
-  top: 20px;
-  width: 512px;
-  height: 512px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+#info {
+  position: absolute;
+  top: 0px;
+  z-index: 100;
+  font-weight: bold;
+  color: #eee;
 }
 #map {
   position: absolute;
