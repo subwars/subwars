@@ -4,12 +4,15 @@ function drawMap(){
   var chars = "0123456789bcdefghjkmnpqrstuvwxyz".split('');
   var parentCell;
 
-  $.each(chars, function(idx,parentChar){
-    $('#grid').append('<div id="gh-'+parentChar+'" class="gh-'+parentChar+'-"></div>');
-    $.each(chars, function(idx,kidChar){
-      $('#gh-'+parentChar).append('<div id="gh-'+parentChar+kidChar+'" class="gh black gh-'+kidChar+'"></div>');
+  $.each(chars, function(idx,gpChar){
+    $('#grid').append('<div id="gh-'+gpChar+'" class="gh-'+gpChar+'--"></div>');
+    $.each(chars, function(idx,parentChar){
+      $('#gh-'+gpChar).append('<div id="gh-'+gpChar+parentChar+'" class="gh-'+parentChar+'-"></div>');
+      $.each(chars, function(idx,kidChar){
+        $('#gh-'+gpChar+parentChar).append('<div id="gh-'+gpChar+parentChar+kidChar+'" class="gh black gh-'+kidChar+'"></div>');
+      });
+      //$('#map').append('<div class="ocean-gray geohash-'+c+'"></div>');
     });
-    //$('#map').append('<div class="ocean-gray geohash-'+c+'"></div>');
   });
 };
 
@@ -39,11 +42,14 @@ function positionUpdated(position){
 
   $('#grid .ocean').removeClass('ocean').addClass('ocean-gray');
 
-  $('#gh-'+sub_geohash.substr(sub_geohash.length-2))
+  //$('#gh-'+sub_geohash.substr(sub_geohash.length-3))
+  var ghid = '#gh-'+sub_geohash.substr(sub_geohash.length-3);
+  $(ghid)
     .removeClass('black')
     .removeClass('ocean-gray')
     .addClass('ocean');
 
+  $(ghid)[0].scrollIntoView(true);
   console.log('accuracy:', accuracy);
   console.log('geohash:', sub_geohash);
 
