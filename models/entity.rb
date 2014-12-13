@@ -5,9 +5,9 @@ class Entity
   attr_accessor :name, :game
   attr_accessor :current_cell, :transitions
 
-  def initialize(game, name)
+  def initialize(game, name=nil)
     @game = game
-    @name = name
+    @name = name unless name.nil?
   end
 
   def root
