@@ -20,7 +20,7 @@ class Game
   end
 
   def create_player(name)
-    Player.new(self, name)
+    players.add Player.new(self, name)
   end
 
   def to_hash
