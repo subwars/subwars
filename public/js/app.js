@@ -4,16 +4,9 @@ function drawMap(){
   var chars = "0123456789bcdefghjkmnpqrstuvwxyz".split('');
   var parentCell;
 
-  //$.each(chars, function(idx,gpChar){
-  //  $('#grid').append('<div id="gh-'+gpChar+'" class="gh-'+gpChar+'--"></div>');
-  //  $.each(chars, function(idx,parentChar){
-  //    $('#gh-'+gpChar).append('<div id="gh-'+gpChar+parentChar+'" class="gh-'+parentChar+'-"></div>');
-  //    $.each(chars, function(idx,kidChar){
-  //      $('#gh-'+gpChar+parentChar).append('<div id="gh-'+gpChar+parentChar+kidChar+'" class="gh black gh-'+kidChar+'"></div>');
-  //    });
-  //    //$('#map').append('<div class="ocean-gray geohash-'+c+'"></div>');
-  //  });
-  //});
+  $.get('/scans', function(data){$.each(data, function(idx, gh){
+    displayGeohash(gh, 'ocean-gray');})
+  })
 };
 
 function scrollToPosition() {
@@ -23,6 +16,30 @@ function scrollToPosition() {
 function positionAcquired(position){
   positionUpdated(position);
   setTimeout(scrollToPosition, 200);
+}
+
+function displayGeohash(sub_geohash, cssClass, removeClass) {
+  var displayed_hash = sub_geohash.substr(sub_geohash.length-4);
+
+  var ancestors = '';
+  var parentCell;
+  $.each(displayed_hash.split(''), function(idx,currentChar){
+    parentCell = (ancestors.length == 0) ? $('#grid') : $('#gh-'+ancestors);;
+    ancestors += currentChar;
+
+    var domId = 'gh-'+ancestors;
+    var dashes = Array(4-idx).join('-'); // lol
+    var cssClass = 'gh-'+currentChar+dashes;
+
+    if ($('#'+domId).length == 0) {
+      parentCell.append('<div id="'+domId+'" class="'+cssClass+'"></div>');
+    }
+  });
+
+  if (typeof removeClass != 'undefined') {
+    $('#gh-'+ancestors).removeClass(removeClass);
+  }
+  $('#gh-'+ancestors).addClass(cssClass);
 }
 
 function positionUpdated(position){
@@ -47,26 +64,8 @@ function positionUpdated(position){
 
   var displayed_hash = sub_geohash.substr(sub_geohash.length-4);
 
-  var ancestors = '';
-  var parentCell;
-  $.each(displayed_hash.split(''), function(idx,currentChar){
-    parentCell = (ancestors.length == 0) ? $('#grid') : $('#gh-'+ancestors);;
-    ancestors += currentChar;
+  displayGeohash(sub_geohash, 'gh-active ocean', 'black ocean-gray');
 
-    var domId = 'gh-'+ancestors;
-    var dashes = Array(3-idx).join('-'); // lol
-    var cssClass = 'gh-'+currentChar+dashes;
-
-    if ($(domId).length == 0) {
-      parentCell.append('<div id="'+domId+'" class="'+cssClass+'"></div>');
-    }
-  });
-
-  $('#gh-'+ancestors)
-    .removeClass('black ocean-gray')
-    .addClass('gh-active ocean');
-
-  //$(ghid)[0].scrollIntoView(true);
   console.log('accuracy:', accuracy);
   console.log('geohash:', sub_geohash);
 
