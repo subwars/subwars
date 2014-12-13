@@ -23,4 +23,9 @@ class Player
       name: name
     }
   end
+
+  def inspect
+    '#<Player:%#x @name="%s" @uuid="%s" num_scans=%i>' %
+      [ object_id, name, uuid, scans.size ]
+  end
 end
