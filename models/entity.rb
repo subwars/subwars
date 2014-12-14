@@ -7,6 +7,7 @@ class Entity
 
   def initialize(game, name=nil)
     @game = game
+    @game.entities << self
     @name = name unless name.nil?
   end
 
@@ -45,5 +46,6 @@ class Entity
     super
     remove_from_current_cell
     self.current_cell = nil
+    game.entities.delete self
   end
 end
