@@ -13,6 +13,18 @@ class Player
     @scans = IdentitySet.new
   end
 
+  def fleet
+    @fleet ||= IdentitySet.new
+  end
+
+  def current_ship
+    fleet.to_a.first || create_ship
+  end
+
+  def create_ship
+    fleet << Submarine.create(game)
+  end
+
   def scan(geocell, time=Time.now)
     scans << Scan.new(self, geocell, time)
   end
