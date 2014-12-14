@@ -10,6 +10,12 @@ module Storable
       self::ROOT_KEY
     end
 
+    def create(*attrs)
+      new_guy = new(*attrs)
+      new_guy.stage
+      new_guy
+    end
+
     def size
       store.size
     end
