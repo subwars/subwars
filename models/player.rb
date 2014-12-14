@@ -13,6 +13,10 @@ class Player
     @scans = IdentitySet.new
   end
 
+  def root
+    game.geocell_root
+  end
+
   def fleet
     @fleet ||= IdentitySet.new
   end
