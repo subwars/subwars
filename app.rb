@@ -27,7 +27,8 @@ module Subwars
 
     get '/scans' do
       content_type :json
-      JSON.dump current_player.scans.map{|scan| scan.cell}
+      cells = current_player.scans.map{|scan| scan.cell}.uniq
+      JSON.dump cells.map{|cell| cell.to_hash}
     end
 
     post '/scans' do
