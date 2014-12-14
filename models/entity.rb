@@ -12,7 +12,7 @@ class Entity
   end
 
   def root
-    game.geocell_root.cell
+    game.geocell_root
   end
 
   def transitions
@@ -20,6 +20,7 @@ class Entity
   end
 
   def move_to(cell)
+    cell = root[cell] if cell.kind_of? String
     remove_from_current_cell
     self.current_cell = cell
     cell.add_content self
@@ -39,7 +40,7 @@ class Entity
 
   def stage
     super
-    move_to root
+    move_to root.cell
   end
 
   def destroy
