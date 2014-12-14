@@ -28,7 +28,11 @@ module Subwars
     get '/scans' do
       content_type :json
       cells = current_player.scans.map{|scan| scan.cell}.uniq
-      JSON.dump cells.map{|cell| cell.to_hash}
+      arrays = cells.map do |cell|
+        icons = cell.contents.map{|e|e.icon}
+        [cell.geohash, icons]
+      end
+      JSON.dump arrays
     end
 
     post '/scans' do
