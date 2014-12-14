@@ -32,8 +32,9 @@ module Subwars
     end
 
     post '/scans' do
-      current_player.scan geohash_param, params[:accuracy].to_f
-      current_player.current_ship.move_to geohash_param
+      geocell = current_player.root[geohash_param]
+      current_player.scan geocell, params[:accuracy].to_f
+      current_player.current_ship.move_to geocell
       Maglev.commit
       status 204
     end
