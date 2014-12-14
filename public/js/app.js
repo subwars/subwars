@@ -4,9 +4,14 @@ function drawMap(){
   var chars = "0123456789bcdefghjkmnpqrstuvwxyz".split('');
   var parentCell;
 
-  $.get('/scans', function(data){$.each(data, function(idx, gh){
-    displayGeohash(gh, 'ocean-gray');})
-  })
+  $.get('/scans', function(data){$.each(data, function(idx, cell){
+    displayGeohash(cell.geohash, 'ocean-gray');
+    $.each(cell.contents, function(idx, entity){
+      var domID = '#gh-'+cell.geohash.substr(4);
+      console.log(domID,cell,entity);
+      $(domID).append('<div class="'+entity.icon+'-normal"></div>');
+    });
+  })})
 };
 
 function scrollToPosition() {
