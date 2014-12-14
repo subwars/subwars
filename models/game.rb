@@ -2,25 +2,24 @@ class Game
   ROOT_KEY = :GAM
   include Storable
 
-  attr_accessor :name, :players, :entities, :geocell_root
+  attr_accessor :name, :players, :entities
 
   def self.default
-    @@default ||= begin
-      new_game = self.new 'Default'
-      new_game.stage
-      new_game
-    end
+    @@default ||= create 'Default'
   end
 
-  def initialize(name)
+  def initialize(name='unknown')
     @name = name
     @players = IdentitySet.new
     @entities = IdentitySet.new
-    @geocell_root = GeocellRoot.new name
+  end
+
+  def geocell_root
+    @geocell_root ||= GeocellRoot.create name
   end
 
   def create_player(name)
-    players.add Player.new(self, name)
+    players.add Player.create(self, name)
   end
 
   def to_hash
