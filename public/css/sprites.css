@@ -1,21 +1,21 @@
 .black{background-color:black;}
-.human-dead, .human-normal, .human-self, .sea-monster-dead, .sea-monster-normal, .seaserpent-dead, .seaserpent-normal, .squid-dead, .squid-normal, .sunken-dead, .sunken-normal, .sunken-self, .ocean, .ocean-gray{
+.submarine-dead, .submarine-normal, .submarine-self, .sea-monster-dead, .sea-monster-normal, .seaserpent-dead, .seaserpent-normal, .squid-dead, .squid-normal, .sunken-dead, .sunken-normal, .sunken-self, .ocean, .ocean-gray{
 	background: url(/img/sprites.png) no-repeat;
 }
 
-.human-dead{
+.submarine-dead{
 	background-position: -32px 0;
 	width: 32px;
 	height: 32px;
 }
 
-.human-normal{
+.submarine-normal{
 	background-position: 0 0;
 	width: 32px;
 	height: 32px;
 }
 
-.human-self{
+.submarine-self{
 	background-position: -64px 0;
 	width: 32px;
 	height: 32px;
