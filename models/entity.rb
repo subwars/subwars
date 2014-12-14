@@ -11,7 +11,7 @@ class Entity
   end
 
   def root
-    game.geocell_root
+    game.geocell_root.cell
   end
 
   def transitions
