@@ -5,11 +5,12 @@ function drawMap(){
   var parentCell;
 
   $.get('/scans', function(data){$.each(data, function(idx, cell){
-    displayGeohash(cell.geohash, 'ocean-gray');
-    $.each(cell.contents, function(idx, entity){
-      var domID = '#gh-'+cell.geohash.substr(4);
-      console.log(domID,cell,entity);
-      $(domID).append('<div class="'+entity.icon+'-normal"></div>');
+    var geohash = cell[0];
+    var icons = cell[1];
+    displayGeohash(geohash, 'ocean-gray');
+    $.each(icons, function(idx, icon){
+      var domID = '#gh-'+geohash.substr(4);
+      $(domID).append('<div class="'+icon+'-normal"></div>');
     });
   })})
 };
