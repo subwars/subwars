@@ -64,13 +64,18 @@ function positionUpdated(position){
   $('#acc').html(accuracy);
   $('#geohash').html(sub_geohash);
 
+  $('#grid .gh-active .submarine-self').remove();
+
   $('#grid .gh-active')
     .removeClass('gh-active ocean')
     .addClass('ocean-gray');
 
+
   var displayed_hash = sub_geohash.substr(sub_geohash.length-4);
 
   displayGeohash(sub_geohash, 'gh-active ocean', 'black ocean-gray');
+
+  $('#grid .gh-active').append('<div class="submarine-self"></div>');
 
   console.log('accuracy:', accuracy);
   console.log('geohash:', sub_geohash);
