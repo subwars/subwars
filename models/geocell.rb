@@ -1,6 +1,8 @@
 class Geocell
   CHARACTERS = '0123456789bcdefghjkmnpqrstuvwxyz'.split('').map{|char| char.to_sym}
 
+  include GeocellNeighborhood
+
   attr_reader :parent, :character
 
   def initialize(character=:' ', parent=nil)
@@ -17,6 +19,12 @@ class Geocell
   def all_kids
     CHARACTERS.each{|char| kids[char]}
     kids
+  end
+
+  def descendants(leaves_only=false,set=IdentitySet.new)
+    set.add self if !leaves_only || @kids.nil?
+    kids.each{|char,kid| kid.descendants(leaves_only,set)} unless @kids.nil?
+    set
   end
 
   def [](symbols)
