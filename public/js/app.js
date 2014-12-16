@@ -4,7 +4,7 @@ function drawMap(){
   var chars = "0123456789bcdefghjkmnpqrstuvwxyz".split('');
   var parentCell;
 
-  $.get('/scans', function(data){$.each(data, function(idx, cell){
+  $.get('/map', function(data){$.each(data, function(idx, cell){
     var geohash = cell[0];
     var icons = cell[1];
     displayGeohash(geohash, 'ocean-gray');
