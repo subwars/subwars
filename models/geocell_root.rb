@@ -14,6 +14,10 @@ class GeocellRoot
     cell[symbols]
   end
 
+  def leaves
+    cell.descendants(true)
+  end
+
   def to_hash
     {
       class: self.class.name,
