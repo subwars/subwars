@@ -25,6 +25,16 @@ module Subwars
       JSON.dump geocell_param.to_hash
     end
 
+    get '/map' do
+      content_type :json
+      cells = current_player.game.geocell_root.leaves.select{|c|c.geohash.length == 8}
+      arrays = cells.map do |cell|
+        icons = cell.contents.map{|e|e.icon}
+        [cell.geohash, icons]
+      end
+      JSON.dump arrays
+    end
+
     get '/scans' do
       content_type :json
       cells = current_player.scans.map{|scan| scan.cell}.uniq
