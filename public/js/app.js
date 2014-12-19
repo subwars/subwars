@@ -25,7 +25,7 @@ function positionAcquired(position){
 }
 
 function displayGeohash(subGeohash, cssClass, removeClass) {
-  var displayedLength = 2;
+  var displayedLength = 4;
   var displayedHash = subGeohash.substr(subGeohash.length-displayedLength);
 
   var ancestors = '';
