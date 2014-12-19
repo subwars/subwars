@@ -1,7 +1,7 @@
 module Subwars
   module Helpers
     def geohash_precision
-      8
+      9
     end
 
     def geohash_param
