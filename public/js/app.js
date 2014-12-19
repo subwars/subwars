@@ -24,17 +24,24 @@ function positionAcquired(position){
   setTimeout(scrollToPosition, 200);
 }
 
-function displayGeohash(sub_geohash, cssClass, removeClass) {
-  var displayed_hash = sub_geohash.substr(sub_geohash.length-4);
+function displayGeohash(subGeohash, cssClass, removeClass) {
+  var displayedLength = 2;
+  var displayedHash = subGeohash.substr(subGeohash.length-displayedLength);
 
   var ancestors = '';
-  var parentCell;
-  $.each(displayed_hash.split(''), function(idx,currentChar){
+
+  var domId;
+  //var domId = 'gh-'+displayedHash;
+  //if ($('#'+domId).length == 0) {
+  //  $('#grid').append('<div id="'+domId+'" class="'+domId+'"></div>');
+  //}
+
+  $.each(displayedHash.split(''), function(idx,currentChar){
     parentCell = (ancestors.length == 0) ? $('#grid') : $('#gh-'+ancestors);;
     ancestors += currentChar;
 
-    var domId = 'gh-'+ancestors;
-    var dashes = Array(4-idx).join('-'); // lol
+    domId = 'gh-'+ancestors;
+    var dashes = Array(displayedLength-idx).join('-'); // lol
     var cssClass = 'gh-'+currentChar+dashes;
 
     if ($('#'+domId).length == 0) {
@@ -43,9 +50,9 @@ function displayGeohash(sub_geohash, cssClass, removeClass) {
   });
 
   if (typeof removeClass != 'undefined') {
-    $('#gh-'+ancestors).removeClass(removeClass);
+    $('#'+domId).removeClass(removeClass);
   }
-  $('#gh-'+ancestors).addClass(cssClass);
+  $('#'+domId).addClass(cssClass);
 }
 
 function positionUpdated(position){
