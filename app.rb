@@ -27,7 +27,7 @@ module Subwars
 
     get '/map' do
       content_type :json
-      cells = current_player.game.geocell_root.leaves.select{|c|c.geohash.length == 8}
+      cells = current_player.game.geocell_root.leaves.select{|c|c.geohash.length == 9}
       arrays = cells.map do |cell|
         icons = cell.contents.map{|e|e.icon}
         [cell.geohash, icons]
