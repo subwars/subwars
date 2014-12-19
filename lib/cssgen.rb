@@ -66,24 +66,47 @@ class Cell
     end
   end
 
-  def self.generate_32
+  def self.generate_32_9
     CHARACTERS.each do |c|
-      cell = new(c, 4096, false)
+      cell = new(c, 4096, true, [2,1])
       str = "\#grid .gh-#{c}--- #{cell.string}"
       puts str
     end
     CHARACTERS.each do |c|
-      cell = new(c, 1024)
+      cell = new(c, 1024, false, [1,1])
       str = "\#grid  .gh-#{c}-- #{cell.string}"
       puts str
     end
     CHARACTERS.each do |c|
-      cell = new(c, 128, false)
+      cell = new(c, 128, true, [2,1])
       str = "\#grid   .gh-#{c}- #{cell.string}"
       puts str
     end
     CHARACTERS.each do |c|
-      cell = new(c, 32)
+      cell = new(c, 32, false, [1,1])
+      str = "\#grid    .gh-#{c} #{cell.string}"
+      puts str
+    end
+  end
+
+  def self.generate_32
+    CHARACTERS.each do |c|
+      cell = new(c, 4096, false, [1,2])
+      str = "\#grid .gh-#{c}--- #{cell.string}"
+      puts str
+    end
+    CHARACTERS.each do |c|
+      cell = new(c, 1024, [1,1])
+      str = "\#grid  .gh-#{c}-- #{cell.string}"
+      puts str
+    end
+    CHARACTERS.each do |c|
+      cell = new(c, 128, false, [1,2])
+      str = "\#grid   .gh-#{c}- #{cell.string}"
+      puts str
+    end
+    CHARACTERS.each do |c|
+      cell = new(c, 32, [1,1])
       str = "\#grid    .gh-#{c} #{cell.string}"
       puts str
     end
@@ -100,15 +123,16 @@ class Cell
   #  @precision = opts[:precision] || 1
   #end
 
-  def initialize(character, pixels=16, vertical=true)
+  def initialize(character, pixels=16, vertical=true, size=[1,1])
     @character = character
     @pixels = pixels
     @vertical = vertical
+    @size = size
   end
 
   # size of cell - bottom right corner
   def extent
-    size.map{|i| i * @pixels}
+    @size.map{|i| i * @pixels}
   end
 
   def coord
@@ -116,60 +140,9 @@ class Cell
   end
 
   def position
-    [coord.first * size.first * @pixels,
-     coord.last * size.last * @pixels]
+    [coord.first * @size.first * @pixels,
+     coord.last * @size.last * @pixels]
   end
-
-  #def base_pixel_size
-  #  16
-  #end
-
-  #def pixels
-  #  @scale * base_pixel_size
-  #end
-
-  def height
-    @vertical ? 7 : 3
-  end
-
-  def size
-    @vertical ? [1,1] : [1,2]
-  end
-
-  #def coord
-  #  @vertical ? COORDS[@character] : COORDS[@character].reverse
-  #end
-
-  #def raw_position
-  #  [coord.first * cell_extent.first, coord.last * cell_extent.last]
-  #end
-
-  #def position_string(character, opts={})
-  #  opts = {vertical:true, precision:1}.merge(opts)
-
-  #  height = opts[:vertical] ? 7 : 3
-  #  precision = opts[:precision].to_i
-
-  #  cell_extent = [precision * 32, precision * 64]
-
-  #  coord = coordinate(character)
-
-  #  p [coord, cell_extent]
-
-  #  if opts[:vertical]
-  #    coord.reverse!
-  #    cell_extent.reverse!
-  #  end
-
-  #  p [coord, cell_extent]
-
-  #  coord = [coord.first, height-coord.last]
-  #  p [coord, cell_extent]
-  #  positions = [coord.first * cell_extent.first, coord.last * cell_extent.last]
-
-  #  p [coord, cell_extent, positions]
-  #  '{ left: %4ipx; top: %4ipx; }' % positions
-  #end
 
   def direction
     @vertical ? :vertical : :horizontal
