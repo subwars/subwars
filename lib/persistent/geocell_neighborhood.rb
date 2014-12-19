@@ -44,11 +44,15 @@ module GeocellNeighborhood
     new_parent[Array(neighbor_char(direction))]
   end
 
-  def neighbors
-    IdentitySet.with_all [
+  def neighbors(depth=1)
+    cells = [
       neighbor(:right), neighbor(:left), neighbor(:top), neighbor(:bottom),
       neighbor(:right).neighbor(:bottom), neighbor(:left).neighbor(:top),
       neighbor(:top).neighbor(:right), neighbor(:bottom).neighbor(:left)
     ]
+    (depth-1).times do
+      cells = cells.map{|c| c.neighbors.to_a}.flatten
+    end
+    IdentitySet.with_all cells
   end
 end
