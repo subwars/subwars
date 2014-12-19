@@ -53,7 +53,7 @@ function positionUpdated(position){
     lng = position.coords.longitude,
     accuracy = position.coords.accuracy,
     full_geohash = window.geohash.encode(lat, lng),
-    sub_geohash = full_geohash.substr(0,8);
+    sub_geohash = full_geohash.substr(0,9);
 
   if (currentGeohash == sub_geohash) {
     return;
