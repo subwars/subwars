@@ -33,7 +33,7 @@ module Subwars
         geocell_param.kids.values.first :
         geocell_param.parent
 
-      siblings_and_cousins = parent.neighbors.inject(IdentitySet.with_all(parent.all_kids.values)) do |set, neighbor|
+      siblings_and_cousins = parent.neighbors(2).inject(IdentitySet.with_all(parent.all_kids.values)) do |set, neighbor|
         neighbor.all_kids.values.each{|cousin| set.add cousin}
         set
       end
