@@ -39,7 +39,7 @@ module Subwars
       end
 
       icons = siblings_and_cousins.inject([]) do |arr,cell|
-        background_class = current_player.scans.any?{|scan| scan.cell == cell} ? 'ocean' : 'ocean-gray'
+        background_class = 'ocean' # current_player.scans.any?{|scan| scan.cell == cell} ? 'ocean' : 'ocean-gray'
         icon_classes = cell.contents.map do |entity|
           '%s-%s' % [entity.icon, (current_player.current_ship == entity ? 'self' : 'normal')]
         end
