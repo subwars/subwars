@@ -119,7 +119,7 @@ $(function(){
     $.post('/move?geohash='+$(this).data('geohash'));
   });
 
-  $('#grid').click(function(){
+  $('#grid').dblclick(function(){
     scrollToPosition();
   });
   navigator.geolocation.getAccurateCurrentPosition(
