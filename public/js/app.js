@@ -16,7 +16,7 @@ function drawMap(){
       var geohash = cell[0];
       var bgClass = cell[1];
       var icons = cell[2];
-      displayGeohash(geohash, bgClass);
+      displayGeohash(geohash, bgClass, 'ocean ocean-gray');
       $.each(icons, function(idx, icon){
         var displayedHash = geohash.substr(geohash.length-displayedLength);
         var domID = '#gh-'+displayedHash;
