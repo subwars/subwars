@@ -52,7 +52,12 @@ module Subwars
 
     post '/scans' do
       current_player.scan geocell_param, params[:accuracy].to_f
-      geocell_param.neighbors(2)
+      geocell_param.neighbors(2).each do |cell|
+        if rand > 0.95
+          ss = Seaserpent.create(game)
+          ss.move_to cell
+        end
+      end
       #current_player.current_ship.move_to geocell_param
       Maglev.commit
       status 204
