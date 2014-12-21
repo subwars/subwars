@@ -53,7 +53,7 @@ module Subwars
     post '/scans' do
       current_player.scan geocell_param, params[:accuracy].to_f
       geocell_param.neighbors(2).each do |cell|
-        if rand > 0.95
+        if rand > 0.999
           ss = Seaserpent.create(game)
           ss.move_to cell
         end
