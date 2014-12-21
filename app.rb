@@ -20,35 +20,40 @@ module Subwars
       send_file File.expand_path('../public/index.html', __FILE__)
     end
 
-    get '/geocells/:geohash' do
-      content_type :json
-      JSON.dump geocell_param.to_hash
+    post '/move' do
+      current_player.current_ship.move_to geocell_param
+      Maglev.commit
+      status 204
     end
 
     get '/map' do
       content_type :json
-      cells = current_player.game.geocell_root.leaves.select{|c|c.geohash.length == 9}
-      arrays = cells.map do |cell|
-        icons = cell.contents.map{|e|e.icon}
-        [cell.geohash, icons]
-      end
-      JSON.dump arrays
-    end
 
-    get '/scans' do
-      content_type :json
-      cells = current_player.scans.map{|scan| scan.cell}.uniq
-      arrays = cells.map do |cell|
-        icons = cell.contents.map{|e|e.icon}
-        [cell.geohash, icons]
+      parent = geocell_param.geohash.length.zero? ?
+        geocell_param.kids.values.first :
+        geocell_param.parent
+
+      siblings_and_cousins = parent.neighbors.inject(IdentitySet.with_all(parent.all_kids.values)) do |set, neighbor|
+        neighbor.all_kids.values.each{|cousin| set.add cousin}
+        set
       end
-      JSON.dump arrays
+
+      icons = siblings_and_cousins.inject([]) do |arr,cell|
+        background_class = current_player.scans.any?{|scan| scan.cell == cell} ? 'ocean' : 'ocean-gray'
+        icon_classes = cell.contents.map do |entity|
+          '%s-%s' % [entity.icon, (current_player.current_ship == entity ? 'self' : 'normal')]
+        end
+        arr << [cell.geohash, background_class, icon_classes]
+        arr
+      end
+
+      JSON.dump icons
     end
 
     post '/scans' do
       current_player.scan geocell_param, params[:accuracy].to_f
       geocell_param.neighbors(2)
-      current_player.current_ship.move_to geocell_param
+      #current_player.current_ship.move_to geocell_param
       Maglev.commit
       status 204
     end

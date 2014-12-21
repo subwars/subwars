@@ -1,16 +1,25 @@
 var currentGeohash = '';
+var mapInterval;
+var displayedLength = 2;
+var refreshSeconds = 5;
 
 function drawMap(){
-  var chars = "0123456789bcdefghjkmnpqrstuvwxyz".split('');
-  var parentCell;
+  if ('' == currentGeohash) return;
 
-  $.get('/map', function(data){$.each(data, function(idx, cell){
+  var chars = "0123456789bcdefghjkmnpqrstuvwxyz".split('');
+
+  //$('.gh-cell').removeClass('ocean-gray ocean');
+  $('.gh-cell div').remove();
+
+  $.get('/map?geohash='+currentGeohash, function(data){$.each(data, function(idx, cell){
     var geohash = cell[0];
-    var icons = cell[1];
-    displayGeohash(geohash, 'ocean-gray');
+    var bgClass = cell[1];
+    var icons = cell[2];
+    displayGeohash(geohash, bgClass);
     $.each(icons, function(idx, icon){
-      var domID = '#gh-'+geohash.substr(4);
-      $(domID).append('<div class="'+icon+'-normal"></div>');
+      var displayedHash = geohash.substr(geohash.length-displayedLength);
+      var domID = '#gh-'+displayedHash;
+      $(domID).append('<div class="'+icon+'"></div>');
     });
   })})
 };
@@ -25,8 +34,8 @@ function positionAcquired(position){
 }
 
 function displayGeohash(subGeohash, cssClass, removeClass) {
-  var displayedLength = 4;
   var displayedHash = subGeohash.substr(subGeohash.length-displayedLength);
+  var parentCell;
 
   var ancestors = '';
 
@@ -44,8 +53,12 @@ function displayGeohash(subGeohash, cssClass, removeClass) {
     var dashes = Array(displayedLength-idx).join('-'); // lol
     var cssClass = 'gh-'+currentChar+dashes;
 
+    if (dashes.length == 0) {
+      cssClass = 'gh-cell ' + cssClass;
+    }
+
     if ($('#'+domId).length == 0) {
-      parentCell.append('<div id="'+domId+'" class="'+cssClass+'"></div>');
+      parentCell.append('<div id="'+domId+'" class="'+cssClass+'" data-geohash="'+subGeohash+'"></div>');
     }
   });
 
@@ -78,23 +91,30 @@ function positionUpdated(position){
     .addClass('ocean-gray');
 
 
-  var displayed_hash = sub_geohash.substr(sub_geohash.length-4);
+  var displayed_hash = sub_geohash.substr(sub_geohash.length-displayedLength);
 
   displayGeohash(sub_geohash, 'gh-active ocean', 'black ocean-gray');
 
-  $('#grid .gh-active').append('<div class="submarine-self"></div>');
+  //$('#grid .gh-active').append('<div class="submarine-self"></div>');
 
   console.log('accuracy:', accuracy);
   console.log('geohash:', sub_geohash);
 
   $.post('/scans?geohash='+sub_geohash+'&accuracy='+accuracy);
+
+  drawMap();
 };
 
 $(function(){
+  mapInterval = setInterval(drawMap, refreshSeconds * 1000);
+
+  $('#grid').on('click', '.gh-cell', function(){
+    $.post('/move?geohash='+$(this).data('geohash'));
+  });
+
   $('#grid').click(function(){
     scrollToPosition();
   });
-  drawMap();
   navigator.geolocation.getAccurateCurrentPosition(
     positionAcquired,
     function(err){console.log(err);},
