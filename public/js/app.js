@@ -9,19 +9,26 @@ function drawMap(){
   var chars = "0123456789bcdefghjkmnpqrstuvwxyz".split('');
 
   //$('.gh-cell').removeClass('ocean-gray ocean');
-  $('.gh-cell div').remove();
 
-  $.get('/map?geohash='+currentGeohash, function(data){$.each(data, function(idx, cell){
-    var geohash = cell[0];
-    var bgClass = cell[1];
-    var icons = cell[2];
-    displayGeohash(geohash, bgClass);
-    $.each(icons, function(idx, icon){
-      var displayedHash = geohash.substr(geohash.length-displayedLength);
-      var domID = '#gh-'+displayedHash;
-      $(domID).append('<div class="'+icon+'"></div>');
+  $.get('/map?geohash='+currentGeohash, function(data){
+    var changes = [];
+    $.each(data, function(idx, cell){
+      var geohash = cell[0];
+      var bgClass = cell[1];
+      var icons = cell[2];
+      displayGeohash(geohash, bgClass);
+      $.each(icons, function(idx, icon){
+        var displayedHash = geohash.substr(geohash.length-displayedLength);
+        var domID = '#gh-'+displayedHash;
+        changes.push([domID, icon]);
+      });
     });
-  })})
+
+    $('.gh-cell div').remove();
+    $.each(changes, function(idx, change){
+      $(change[0]).append('<div class="'+change[1]+'"></div>');
+    });
+  })
 };
 
 function scrollToPosition() {
